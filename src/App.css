@@ -1,38 +1,21 @@
-.App {
-  text-align: center;
+body{
+  background: url(https://mblogthumb-phinf.pstatic.net/MjAyMDA0MDFfMjcx/MDAxNTg1NzIxOTU0MzIw.LBlT7fZqYUuPTHPuKWORwd32_Yv0d_TzSAALsZ6XIuAg.i1tQoxAAMCUHHLgHxxifSA-IIzYhEs9P-3okYVqF1hkg.JPEG.minarigirl/1.jpg?type=w800);
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container{
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.weather-box{
+  border:3px solid white;
+  padding: 50px;
+  border-radius: 30px;
+  background-color: azure;
 }
