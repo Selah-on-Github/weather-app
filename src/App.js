@@ -3,6 +3,8 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import WeatherBox from './component/WeatherBox';
 import WeatherButton from './component/WeatherButton';
+import ClipLoader from "react-spinners/ClipLoader";
+
 
 // 1. 앱이 실행되자마자 현재위치 기반의 날씨가 보인다.
 // 2. 날씨정보에는 도시, 섭씨, 화씨, 날씨상태
@@ -13,7 +15,8 @@ import WeatherButton from './component/WeatherButton';
 function App() {
   const[weather,setweather]=useState(null);
   const [city,setCity]=useState("");
-  const cities = ['paris', 'new york', 'tokyo', 'seoul'];
+  const [loading,setLoading]=useState(false);
+  const cities = ['Paris', 'New York', 'Tokyo', 'Seoul'];
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position)=>{
       let lat = position.coords.latitude;
@@ -25,16 +28,20 @@ function App() {
 
   const getWeatherByCurrentLocation = async (lat, lon) => {
     let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=75f02e94ccf566e2fcff4b5dceadb010&units=metric`;
+    setLoading(true);
     let response = await fetch(url);
     let data = await response.json();
     setweather(data);
+    setLoading(false);
   };
 
   const getWeatherByCity = async () => {
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=75f02e94ccf566e2fcff4b5dceadb010&units=metric`;
+    setLoading(true);
     let response = await fetch(url);
     let data = await response.json();
     setweather(data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -47,10 +54,16 @@ function App() {
 
   return (
     <div>
-      <div className="container">
-        <WeatherBox weather={weather} />
-        <WeatherButton cities={cities} setCity={setCity}/>
-      </div>
+      {loading ? (
+        <div className="container">
+          <ClipLoader color="#f88c6b" loading={loading} size={150} />
+        </div>
+      ) : (
+        <div className="container">
+          <WeatherBox weather={weather} />      
+          <WeatherButton cities={cities} setCity={setCity}/>
+        </div>
+      )}
     </div>
   );
 }
